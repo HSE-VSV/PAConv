@@ -13,6 +13,9 @@ import sklearn.metrics as metrics
 from tensorboardX import SummaryWriter
 import random
 from tqdm import tqdm
+import matplotlib.pyplot as plt
+import seaborn as sns
+import io as py_io
 
 
 def get_parser():
@@ -157,11 +160,26 @@ def train(args, io):
         test_true = np.concatenate(test_true)
         test_pred = np.concatenate(test_pred)
         test_acc = metrics.accuracy_score(test_true, test_pred)
-        outstr = 'Test %d, loss: %.6f, test acc: %.6f,' % (epoch, test_loss * 1.0 / count, test_acc)
+        
+        test_f1_macro = metrics.f1_score(test_true, test_pred, average='macro', zero_division=0)
+
+        outstr = 'Test %d, loss: %.6f, test acc: %.6f, test f1 (macro): %.6f,' % (epoch, test_loss * 1.0 / count, test_acc, test_f1_macro)
         io.cprint(outstr)
 
         writer.add_scalar('loss_test', test_loss * 1.0 / count, epoch + 1)
         writer.add_scalar('Acc_test', test_acc, epoch + 1)
+        writer.add_scalar('F1_test_macro', test_f1_macro, epoch + 1)
+
+        save_cm_every_n = getattr(args, 'save_confusion_matrix_every_n_epochs', 10)
+        if (epoch + 1) % save_cm_every_n == 0:
+            cm = metrics.confusion_matrix(test_true, test_pred)
+            fig_cm = plt.figure(figsize=(12, 10))
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=plt.gca())
+            plt.xlabel('Predicted Label')
+            plt.ylabel('True Label')
+            plt.title(f'Test Confusion Matrix - Epoch {epoch+1}')
+            writer.add_figure('Test/Confusion_Matrix', fig_cm, global_step=epoch + 1)
+            plt.close(fig_cm)
 
         if test_acc >= best_test_acc:
             best_test_acc = test_acc

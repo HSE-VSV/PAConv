@@ -9,3 +9,5 @@ numpy
 matplotlib
 ninja
 tqdm
+seaborn
+matplotlib
