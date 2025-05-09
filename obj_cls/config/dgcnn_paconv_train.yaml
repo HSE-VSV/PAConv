@@ -9,7 +9,7 @@ TRAIN:
   exp_name: dgcnn_paconv_train
   num_points: 1024
   pt_norm: False  # input normalization
-  batch_size: 32
+  batch_size: 16
   test_batch_size: 16
   epochs: 350
   lr: 0.1
@@ -17,3 +17,4 @@ TRAIN:
   eval: False
   dropout: 0.5
   no_cuda: False
+  workers: 1

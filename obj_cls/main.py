@@ -12,6 +12,7 @@ from util.util import cal_loss, IOStream, load_cfg_from_cfg_file, merge_cfg_from
 import sklearn.metrics as metrics
 from tensorboardX import SummaryWriter
 import random
+from tqdm import tqdm
 
 
 def get_parser():
@@ -111,7 +112,7 @@ def train(args, io):
         model.train()
         train_pred = []
         train_true = []
-        for data, label in train_loader:
+        for data, label in tqdm(train_loader, desc=f"Epoch {epoch+1} [Train]"):
             data, label = data.to(device), label.to(device).squeeze()
             data = data.permute(0, 2, 1)
             batch_size = data.size()[0]
@@ -142,7 +143,7 @@ def train(args, io):
         model.eval()
         test_pred = []
         test_true = []
-        for data, label in test_loader:
+        for data, label in tqdm(test_loader, desc=f"Epoch {epoch+1} [Test]"):
             data, label = data.to(device), label.to(device).squeeze()
             data = data.permute(0, 2, 1)
             batch_size = data.size()[0]

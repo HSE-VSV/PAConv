@@ -1,0 +1,6 @@
+# Ignoriere alles im Ordner
+/modelnet40_ply_hdf5_2048/*
+
+# Aber erlaube diese Dateien
+!modelnet40_ply_hdf5_2048/.gitkeep
+!modelnet40_ply_hdf5_2048/README.md

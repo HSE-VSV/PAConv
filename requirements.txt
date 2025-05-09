@@ -1,0 +1,11 @@
+torch>=2.0.0
+torchvision
+scikit-learn
+tensorboardX
+h5py
+tqdm
+pyyaml
+numpy
+matplotlib
+ninja
+tqdm
