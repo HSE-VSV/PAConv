@@ -2,7 +2,8 @@
 #SBATCH --partition=gpu1
 #SBATCH --ntasks-per-gpu=48
 #SBATCH --gres=gpu:1
-#SBATCH --time=1:00:00
+#SBATCH --time=12:00:00
+#SBATCH --mem=16G
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=todiit00@hs-esslingen.de
 #SBATCH --job-name=paconv_train
