@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --partition=gpu1
-#SBATCH --ntasks-per-gpu=48
+#SBATCH --ntasks-per-gpu=4
 #SBATCH --gres=gpu:1
-#SBATCH --time=12:00:00
+#SBATCH --time=14:00:00
 #SBATCH --mem=16G
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=todiit00@hs-esslingen.de
