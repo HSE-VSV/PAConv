@@ -3,7 +3,7 @@
 #SBATCH --ntasks-per-gpu=4
 #SBATCH --gres=gpu:1
 #SBATCH --time=14:00:00
-#SBATCH --mem=16G
+#SBATCH --mem=8G
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=todiit00@hs-esslingen.de
 #SBATCH --job-name=paconv_train
@@ -33,4 +33,4 @@ time python3 obj_cls/main.py --config obj_cls/config/dgcnn_paconv_train.yaml
 
 # Optional: Kopiere Ergebnisse zurück ins HOME-Verzeichnis
 mkdir -p $HOME/paconv/results
-rsync -avz obj_cls/checkpoints/ $HOME/paconv/results/checkpoints_$SLURM_JOB_ID/
+rsync -avz checkpoints/ $HOME/paconv/results/checkpoints_$SLURM_JOB_ID/
