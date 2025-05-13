@@ -10,7 +10,7 @@ import numpy as np
 from torch.utils.data import DataLoader
 from util.util import cal_loss, IOStream, load_cfg_from_cfg_file, merge_cfg_from_list
 import sklearn.metrics as metrics
-from tensorboardX import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 import random
 from tqdm import tqdm
 import matplotlib.pyplot as plt
