@@ -18,7 +18,7 @@ cd $TMPDIR
 # Kopiere Projekt + Daten aus dem HOME-Verzeichnis
 rsync -avz $HOME/paconv/obj_cls/ ./obj_cls/
 rsync -avz $HOME/paconv/data/ ./data/
-rsync -avz $HOME/paconv/requirements.txt .
+rsync -avz --inplace $HOME/paconv/requirements.txt .
 
 # Erstelle virtuelle Umgebung
 python3 -m venv paconv-env
