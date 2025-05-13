@@ -185,7 +185,8 @@ def train(args, io):
             best_test_acc = test_acc
             io.cprint('Max Acc:%.6f' % best_test_acc)
             torch.save(model.state_dict(), 'checkpoints/%s/best_model.t7' % args.exp_name)
-
+            
+    writer.close()
 
 def test(args, io):
     test_loader = DataLoader(ModelNet40(partition='test', num_points=args.num_points, pt_norm=False),
