@@ -6,6 +6,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from util.data_util import ModelNet40 as ModelNet40
+from util.fmcw_test_util import FMCWDataset
 import numpy as np
 from torch.utils.data import DataLoader
 from util.util import cal_loss, IOStream, load_cfg_from_cfg_file, merge_cfg_from_list
@@ -79,6 +80,13 @@ def train(args, io):
                               num_workers=args.workers, batch_size=args.batch_size, shuffle=True, drop_last=True)
     test_loader = DataLoader(ModelNet40(partition='test', num_points=args.num_points, pt_norm=False),
                              num_workers=args.workers, batch_size=args.test_batch_size, shuffle=False, drop_last=False)
+
+    if args.dataset == 'fmcw':
+        train_loader = DataLoader(FMCWDataset(root_dir='data/fmcw_test', num_points=args.num_points),
+                                batch_size=args.batch_size, shuffle=True, num_workers=args.workers)
+        test_loader = DataLoader(FMCWDataset(root_dir='data/fmcw_test', num_points=args.num_points),
+                                batch_size=args.test_batch_size, shuffle=False, num_workers=args.workers)
+
 
     device = torch.device("cuda" if args.cuda else "cpu")
 

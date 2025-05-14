@@ -11,3 +11,4 @@ ninja
 tqdm
 seaborn
 matplotlib
+open3d
